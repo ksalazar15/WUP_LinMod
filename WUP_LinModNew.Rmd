@@ -79,12 +79,29 @@ The prediction interval is from -1.7 to 3.1 for SIM score.
 
 ### Now add in scatterplot
 
+```{r}
+model.1 <- lm(SIMS~GRIP,data=data)
+plot(SIMS~GRIP,data=data)
+abline(model.1, col='red')
+```
+
+This graph shows that as grip strength goes up the simulation score goes up also.
 
 ### Numerical results 
 
+```{r}
+cor(SIMS~GRIP,data=data)
+```
+The correlation coefficient is 0.64 which shows that grip strength is related to sim score.
 
 ### Inferential  (Build model.2)
-  
+
+```{r}
+model.1 <- lm(SIMS~GRIP,data=data)
+summary.lm(model.1)
+```  
+
+
 
 #### predict model.2 at target point
 
