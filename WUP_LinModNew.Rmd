@@ -76,16 +76,16 @@ predict(model.1, newdata, interval="predict")
 The prediction interval is from -1.7 to 3.1 for SIM score.
 
 ## Model 2 SIM~GRIP
-
-### Now add in scatterplot
+## Results
+### Graphical Results
 
 ```{r}
-model.1 <- lm(SIMS~GRIP,data=data)
+model.2 <- lm(SIMS~GRIP,data=data)
 plot(SIMS~GRIP,data=data)
-abline(model.1, col='red')
+abline(model.2, col='green')
 ```
 
-This graph shows that as grip strength goes up the simulation score goes up also.
+This graph shows that as grip strength goes up the simulation score goes up also. The spread of the points around the regression line in the grip plot are more spread out than the arm strength plot.
 
 ### Numerical results 
 
@@ -97,27 +97,50 @@ The correlation coefficient is 0.64 which shows that grip strength is related to
 ### Inferential  (Build model.2)
 
 ```{r}
-model.1 <- lm(SIMS~GRIP,data=data)
-summary.lm(model.1)
+model.2 <- lm(SIMS~GRIP,data=data)
+summary.lm(model.2)
 ```  
+Both $b_0$ (The Intercept) and $b_1$ (The coefficient of arm strength) are significantly different from 0 because their P-values are very small
 
-
-
-#### predict model.2 at target point
-
-#### now add the model fit to our plot for model.2
+### Prediction Interval
+```{r}
+newdata = data.frame(ARM=88, GRIP=94)
+predict(model.2, newdata, interval="predict")
+```
   
 
 
 ## Model 3 SIM~ARM+GRIP
 
+## Results
+### Graphical Results
+
+```{r}
+model.3 <- lm(SIMS~ARM+GRIP,data=data)
+plot(SIMS~ARM,data=data)
+abline (model.3, col='turquoise')
+plot(SIMS~GRIP,data=data)
+abline (model.3, col='orange')
+```
+
 ### Numerical results (cor)
 
-`
+```{r}
+cor(SIMS~ARM+GRIP,data=data)
+```
   
 ### Inferential  (Build 2-dimentional model.3)
 
-#### predict model.3 at target point
+```{r}
+model.3 <- lm(SIMS~ARM+GRIP,data=data)
+summary.lm(model.3)
+```  
+
+### Prediction Interval
+```{r}
+newdata = data.frame(ARM=88, GRIP=94)
+predict(model.3, newdata, interval="predict")
+```
   
 
 ## Comparing nested models ANOVA Test
