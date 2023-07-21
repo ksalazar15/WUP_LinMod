@@ -85,7 +85,7 @@ plot(SIMS~GRIP,data=data)
 abline(model.2, col='green')
 ```
 
-This graph shows that as grip strength goes up the simulation score goes up also. The spread of the points around the regression line in the grip plot are more spread out than the arm strength plot.
+This graph shows that as grip strength goes up the simulation score goes up, Also the spread of the points around the regression line in the grip plot are more spread out than that of the arm strength plot.
 
 ### Numerical results 
 
@@ -93,6 +93,7 @@ This graph shows that as grip strength goes up the simulation score goes up also
 cor(SIMS~GRIP,data=data)
 ```
 The correlation coefficient is 0.64 which shows that grip strength is related to sim score.
+
 
 ### Inferential  (Build model.2)
 
@@ -111,17 +112,7 @@ predict(model.2, newdata, interval="predict")
 
 
 ## Model 3 SIM~ARM+GRIP
-
 ## Results
-### Graphical Results
-
-```{r}
-model.3 <- lm(SIMS~ARM+GRIP,data=data)
-plot(SIMS~ARM,data=data)
-abline (model.3, col='turquoise')
-plot(SIMS~GRIP,data=data)
-abline (model.3, col='orange')
-```
 
 ### Numerical results (cor)
 
@@ -135,6 +126,7 @@ cor(SIMS~ARM+GRIP,data=data)
 model.3 <- lm(SIMS~ARM+GRIP,data=data)
 summary.lm(model.3)
 ```  
+
 
 ### Prediction Interval
 ```{r}
