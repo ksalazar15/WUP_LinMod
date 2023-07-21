@@ -73,7 +73,7 @@ newdata = data.frame(ARM=88, GRIP=94)
 predict(model.1, newdata, interval="predict")
 ```
 
-The prediction interval is from -1.7 to 3.1 for SIM score.
+The prediction interval is from -1.7 to 3.1 for SIM score. This shows that if we repeat this test multiple times with arm strength being 88 and grip strength 94 it will fall within that interval 95% of the time.
 
 ## Model 2 SIM~GRIP
 ## Results
@@ -108,7 +108,7 @@ Both $b_0$ (The Intercept) and $b_1$ (The coefficient of arm strength) are signi
 newdata = data.frame(ARM=88, GRIP=94)
 predict(model.2, newdata, interval="predict")
 ```
-  
+The prediction interval is from -3.1 to 2.0 for SIM score. This shows that if we repeat this test multiple times with arm strength being 88 and grip strength 94 it will fall within that interval 95% of the time. 
 
 
 ## Model 3 SIM~ARM+GRIP
@@ -119,26 +119,35 @@ predict(model.2, newdata, interval="predict")
 ```{r}
 cor(SIMS~ARM+GRIP,data=data)
 ```
-  
+The correlation coefficient is 0.73 which shows that grip strength is related to sim score.
+
 ### Inferential  (Build 2-dimentional model.3)
 
 ```{r}
 model.3 <- lm(SIMS~ARM+GRIP,data=data)
 summary.lm(model.3)
 ```  
-
+Both $b_0$ (The Intercept) and $b_1$ (The coefficient of arm strength) are significantly different from 0 because their P-values are very small
 
 ### Prediction Interval
 ```{r}
 newdata = data.frame(ARM=88, GRIP=94)
 predict(model.3, newdata, interval="predict")
 ```
-  
+The prediction interval is from -2.1 to 2.4 for SIM score. This shows that if we repeat this test multiple times with arm strength being 88 and grip strength 94 it will fall within that interval 95% of the time.
 
 ## Comparing nested models ANOVA Test
 
-### Model.1 vs Model.3
-### Model.2 vs Model.3
-
 ## Informally compare Model.1 with model.2
+```{r}
+anova(model.3, model.1)
+```
+The P value is 0.00000499 so I reject the null hypothesis so that means one of the models is better than another therefore I conclude that model 1 is better because rss for model one is smaller.
 
+```{r}
+anova(model.3, model.2)
+```
+The P value is so small I reject the null hypothesis so that means one of the models is better than another therefore I conclude that model 1 is better because rss for model one is smaller than both model three and two.
+
+# Discussion / Conclusion
+The original question was model sms and figure out which model works better at proving it by having a smaller rss compared to the other available models. Based on the tests that we've conducted we can conclude that the model with sim~arm+grip is the best since it has a smaller rss compared to the other models.
